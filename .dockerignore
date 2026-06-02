@@ -1,0 +1,13 @@
+.git
+.gitignore
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+.cache
+data/uploads/*
+!data/uploads/.gitkeep
+docs
+tests

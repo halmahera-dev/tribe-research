@@ -1,0 +1,28 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tribe-v2-virality-app
+    ports:
+      - "8122:8122"
+    environment:
+      APP_NAME: "TRIBE v2 Virality Predictor"
+      PORT: "8122"
+      PREDICTOR_MODE: "auto"
+      MAX_VIDEO_SECONDS: "15"
+      MAX_UPLOAD_MB: "120"
+      TRIBE_REPO_ID: "facebook/tribev2"
+      TRIBE_CHECKPOINT_NAME: "best.ckpt"
+      TRIBE_CACHE_DIR: "/app/.cache/tribe"
+      TRIBE_DEVICE: "auto"
+      TASK_DEVICE: "auto"
+      TASK_NUM_WORKERS: "8"
+      KEEP_UPLOADS: "false"
+      UPLOADS_DIR: "/app/data/uploads"
+      LOG_LEVEL: "INFO"
+      HF_TOKEN: "${HF_TOKEN}"
+    volumes:
+      - ./data/uploads:/app/data/uploads
+      - ./.cache/tribe:/app/.cache/tribe
+    restart: unless-stopped

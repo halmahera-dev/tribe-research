@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-shell">
+    <div class="ambient ambient-left"></div>
+    <div class="ambient ambient-right"></div>
+
+    <header class="topbar card card-flat">
+        <div class="brand-wrap brand-inline">
+            <div class="brand-mark">VP</div>
+            <div>
+                <span class="brand-pill">TRIBE v2 Engine</span>
+                <h1>{{ app_name }}</h1>
+            </div>
+        </div>
+        <div class="topbar-right">
+            <p class="topbar-note">Prototype inspired by Higgsfield-style virality analysis</p>
+            <p class="topbar-subnote">Upload | Analyze | Optimize Hook</p>
+        </div>
+    </header>
+
+    <main class="grid-layout">
+        <section class="card upload-card">
+            <div class="section-head">
+                <h2>Upload Video Hook</h2>
+                <span class="section-chip">Step 1</span>
+            </div>
+            <p class="muted">
+                Upload klip singkat untuk prediksi virality. Batas saat ini:
+                <strong>{{ max_video_seconds }} detik</strong>,
+                ukuran file maksimal <strong>{{ max_upload_mb }} MB</strong>.
+            </p>
+
+            <form id="upload-form" enctype="multipart/form-data">
+                <label for="video-input" class="dropzone" id="dropzone">
+                    <input id="video-input" name="video" type="file" accept="video/*" required>
+                    <div class="dropzone-content">
+                        <div class="drop-icon">▶</div>
+                        <p><strong>Drop video kamu di sini</strong></p>
+                        <p class="muted">atau klik untuk pilih file</p>
+                    </div>
+                </label>
+                <div class="form-meta">
+                    <span id="file-name" class="file-name">Belum ada file dipilih</span>
+                    <button id="analyze-btn" type="submit">Analyze Virality</button>
+                </div>
+            </form>
+            <div class="upload-checklist">
+                <span>Ideal: 7-15 detik</span>
+                <span>Hook kuat di 1-3 detik awal</span>
+                <span>Visual kontras + pacing cepat</span>
+            </div>
+
+            <div id="status-box" class="status-box status-idle">
+                Siap untuk menganalisis video kamu.
+            </div>
+        </section>
+
+        <section class="card score-card">
+            <div class="section-head">
+                <h2>Result Snapshot</h2>
+                <span class="section-chip">Step 2</span>
+            </div>
+            <div class="score-grid">
+                <article>
+                    <h3>Virality Score</h3>
+                    <p id="virality-score" class="score-value">--</p>
+                </article>
+                <article>
+                    <h3>Hook Score</h3>
+                    <p id="hook-score" class="score-value">--</p>
+                </article>
+                <article>
+                    <h3>Hold Rate</h3>
+                    <p id="hold-rate" class="score-value">--</p>
+                </article>
+                <article>
+                    <h3>Peak Hook</h3>
+                    <p id="peak-second" class="score-value">--</p>
+                </article>
+            </div>
+            <p id="engine-badge" class="engine-badge">Engine: --</p>
+        </section>
+
+        <section class="card timeline-card">
+            <div class="section-head">
+                <h2>Attention Timeline</h2>
+                <span class="section-chip">Step 3</span>
+            </div>
+            <div id="timeline-bars" class="timeline-bars"></div>
+            <p class="muted small">Semakin tinggi bar, semakin tinggi prediksi intensitas perhatian.</p>
+        </section>
+
+        <section class="card heatmap-card">
+            <div class="section-head">
+                <h2>Brain Region Heatmap</h2>
+                <span class="section-chip">Neural Signal</span>
+            </div>
+            <div id="heatmap-wrap" class="heatmap-wrap"></div>
+        </section>
+
+        <section class="card insight-card">
+            <div class="section-head">
+                <h2>Highlights</h2>
+                <span class="section-chip">Actionable</span>
+            </div>
+            <ul id="highlight-list" class="highlight-list">
+                <li>Belum ada hasil analisis.</li>
+            </ul>
+            <h3>Notes</h3>
+            <ul id="note-list" class="note-list"></ul>
+        </section>
+    </main>
+</div>
+{% endblock %}
